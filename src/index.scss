@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$orangeMash : #EB6E44;
+
+
+:root {
+        margin: 0;
+        font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+        font-weight: 400;
+
+        color-scheme: light dark;
+        color: #000;
+        background-color: #ebeaea;
+
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-text-size-adjust: 100%;
+    }
+    #root {
+            margin: 0;
+            padding: 0;
+            width:100%;
+    }
+
+    a {
+        font-weight: 500;
+        color: #000;
+        text-decoration: inherit;
+    }
+    a:hover {
+        color: $orangeMash;
+    }
+
+    body {
+        margin: 0;
+        // place-items: center;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    h1 {
+        font-size: 3.2em;
+        line-height: 1.1;
+    }
+
+    button {
+        border-radius: 8px;
+        border: 1px solid transparent;
+        padding: 0.6em 1.2em;
+        font-size: 1em;
+        font-weight: 500;
+        font-family: inherit;
+        background-color: #1a1a1a;
+        cursor: pointer;
+        transition: border-color 0.25s;
+    }
+    button:hover {
+        border-color: $orangeMash;
+    }
+    button:focus,
+    button:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            color: #213547;
+            background-color: #ffffff;
+        }
+        a:hover {
+            color: $orangeMash;
+        }
+        button {
+            background-color: #f9f9f9;
+        }
+    }
+
+    header {
+        background-color: white;
+        box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
+        padding: 0 1em;
+    }
+
+    .header-top {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        background-color: white;
+        justify-content: space-between;
+    }
+
+    .header-bottom {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+    }
+
+    .hb-display {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .pb-1 {
+        padding-bottom: .5em;
+    }
+
+    nav, nav ul {
+        display: flex;
+        width: 100%;
+        list-style: none;
+        padding: 0;
+    }
+
+    nav ul li {
+        font-size: 1.4rem;
+        font-family: 'Inter', sans-serif;
+        margin: 0 1em;
+    }
+
+    .search-bar {
+        border-radius: 3px;
+        border: 4px solid rgb(196, 195, 195);
+        padding: 0.2em 1.2em;
+        font-size: 1em;
+        font-weight: 500;
+        font-family: inherit;
+        background-color: white;
+        cursor: pointer;
+        transition: border-color 0.25s;
+        color: $orangeMash;
+        width:40%;
+        margin-bottom: 1em;
+    }
+
+    .icon {
+        width: 5em;
+        margin : 0 1em;
+        cursor: pointer;
+    }
+
+    .orangeMashFont {
+        color: $orangeMash;
+    }
+
+    .orangeMashFont:hover {
+        color: black;
+    }
+
+    .orangeMashBg {
+        background-color: $orangeMash;
+    }
+
+    .header-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        max-width: 600px;
+    }
+
+    .fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding-top: 20px;
+        background-color: white;
+    }
+
+    .disabled {
+        display:none;
+    }
+
+    .logo-sm {
+        width: 100px;
+    }
+
+    .side-menu-btn {
+        background-color: $orangeMash;
+        position: absolute;
+        top: 138px;
+        left:0;
+        border-bottom-right-radius: 15px;
+        border-top-right-radius: 15px;
+        padding: 0.2em 0.5em;
+    }
+
+    .sidem-btn-pos {
+        background-color: $orangeMash;
+        position: absolute;
+        top: 45px;
+        left:0;
+        border-bottom-right-radius: 15px;
+        border-top-right-radius: 15px;
+        padding: 0.2em 0.5em;
+    }
+
+    .icon-menu {
+        width: 2em;
+        cursor: pointer;
+    }
+
+    @keyframes wiggle {
+        0% { transform: rotate(0deg); }
+        20% { transform: rotate(-10deg); }
+        40% { transform: rotate(10deg); }
+        60% { transform: rotate(-10deg); }
+        80% { transform: rotate(10deg); }
+        100% { transform: rotate(0deg); }
+    }
+
+    .wiggle {
+        animation: wiggle 0.3s ease-in-out;
+    }
