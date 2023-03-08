@@ -199,9 +199,13 @@ $orangeMash : #EB6E44;
         position: absolute;
         top: 138px;
         left:0;
+        z-index:100;
         border-bottom-right-radius: 15px;
         border-top-right-radius: 15px;
-        padding: 0.2em 0.5em;
+        padding: 0.5em;
+        border-right: 2px solid rgb(43, 41, 41);
+        border-top: 2px solid rgb(43, 41, 41);
+        border-bottom: 2px solid rgb(43, 41, 41);
     }
 
     .sidem-btn-pos {
@@ -209,14 +213,64 @@ $orangeMash : #EB6E44;
         position: absolute;
         top: 45px;
         left:0;
+        z-index:100;
         border-bottom-right-radius: 15px;
         border-top-right-radius: 15px;
         padding: 0.2em 0.5em;
+        border-right: 2px solid rgb(43, 41, 41);
+        border-top: 2px solid rgb(43, 41, 41);
+        border-bottom: 2px solid rgb(43, 41, 41);
     }
 
     .icon-menu {
         width: 2em;
         cursor: pointer;
+    }
+
+    .icon-menu-open {
+        margin-bottom: 1em;
+    }
+
+    .menu-open {
+        display: flex;
+        flex-direction: column;
+        min-width: 225px;
+        padding: 0 1em 0 .5em;
+    }
+
+    .menu-items {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        background-color: white;
+        z-index: 100;
+        border: 2px solid rgb(43, 41, 41);
+        border-radius: 8px;
+    }
+
+    .list-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .list-menu li {
+        font-size: 1rem;
+        margin: 0 1em;
+        padding: 0.3em 0;
+        border-radius: 5px;
+        width: 96%;
+        text-align: center;
+        margin: 0.3em auto;
+        background-color: #EB6E44;
+        color:  rgb(43, 41, 41);
+        font-weight: bold;
+    }
+
+    .list-menu li:hover {
+        background-color: #bb5735;
+        color:white ;
     }
 
     @keyframes wiggle {
@@ -231,3 +285,74 @@ $orangeMash : #EB6E44;
     .wiggle {
         animation: wiggle 0.3s ease-in-out;
     }
+
+
+// CAROUSEL
+.carousel-container {
+    width: 1000px;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+}
+
+.car-item {
+    width: 100px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.car-item.active {
+    transform: translateX(0);
+    transition: 1000ms ease;
+}
+
+.car-item:not(.active) {
+    transform: translateX(100%);
+    transition: 1000ms ease;
+}
+
+.slideshow {
+    margin: 0 auto;
+    overflow: hidden;
+    max-width: 500px;
+}
+
+.slideshow {
+    margin: 0 auto;
+    overflow: hidden;
+    max-width: 90vw;
+}
+
+.slideshowSlider {
+    white-space: nowrap;
+    transition: 1000ms ease;
+}
+
+.slide {
+    display: inline-block;
+    height: 400px;
+    width: 200px;
+    border-radius: 40px;
+}
+
+/* Buttons */
+.slideshowDots {
+    text-align: center;
+}
+
+.slideshowDot {
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 15px 7px 0px;
+    background-color: #c4c4c4;
+}

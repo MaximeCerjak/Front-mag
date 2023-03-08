@@ -5,7 +5,11 @@ function Menu() {
     const [showMenu, setShowMenu] = useState(false);
 
     function toggleMenu() {
-    setShowMenu(!showMenu);
+        setShowMenu(!showMenu);
+        const menu = document.querySelector('.menu');
+        const icone = document.querySelector('.icon-menu');
+        menu.classList.toggle('menu-open');
+        icone.classList.toggle('icon-menu-open');
     }
 
     return (
@@ -13,10 +17,10 @@ function Menu() {
         <img src={pocketCase} className="icon-menu"  onClick={toggleMenu} />
         {showMenu && (
         <div className="menu-items">
-            <ul>
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3</li>
+            <ul className='list-menu'>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
             </ul>
         </div>
         )}
