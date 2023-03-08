@@ -1,58 +1,53 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState, useRef } from "react";
+import images from "./images";
+import { CSSTransition } from "react-transition-group";
 
-function Slideshow() {
-    const [images, setImages] = useState([]);
-    const [index, setIndex] = useState(0);
-    const delay = 2500;
+const Slideshow = () => {
+    const [currentIndex, setIndex] = useState(0);
+    const [ imgArray, setNewArray ] = useState(images); 
 
-    const getImages = async () => {
-        const response = await axios.get("http://localhost:8000/picture");
-        return response.data;
-    };
-
-    const moveFirstImageToEnd = () => {
-        if( images.length > 0 ) {
-            const firstImage = images.shift();
-            setImages([...images, firstImage]);
-        }
-    };
+    const slide = document.querySelector('.slide');
+    const [slideHeight, setSlideHeight] = useState(0);
+    console.log(slide);
+    // const [slideWidth, setSlideWidth] = useState(slide.style.width);
+    const ratio = 0.75; // ratio hauteur/largeur
 
     useEffect(() => {
-        const fetchImages = async () => {
-            const data = await getImages();
-            setImages(data);
-            console.log(images);
-        };
-        fetchImages();
+        const slide = document.querySelector('.slide');
+        console.log(slide);
     }, []);
 
     useEffect(() => {
-        setTimeout(
-            () =>
-            setIndex((prevIndex) =>
-                prevIndex === images.length - 1 ? 0 : prevIndex + 1
-            ),
-            delay
-        );
-        console.log(images);
-        moveFirstImageToEnd();
-        return () => {};
-    }, [index]);
+        const interval = setInterval(() => {
+            setNewArray((prevArray) => {
+                const newArray = prevArray.slice();
+                const firstImg = newArray.shift();
+                return [...newArray, firstImg];
+            });
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [imgArray]);
 
     return (
         <div className="slideshow">
-        <div className="slideshowSlider"
-            style={{ transform: `translate3d(${-index * 200}px, 0, 0)` }}
-        >
-            {images.map((image, index) => (
+        <div className="slideshowSlider" style={{ transform: `translateX(-${currentIndex * 20}%)`, transition: 'transform 0.5s ease-in-out' }}>
+            {imgArray.map((image, index) => (
                 image && (
+                <CSSTransition
+                    key={image.title}
+                    classNames="slide"
+                    timeout={{ enter: 500, exit: 500 }}
+                >
+                <div className="slide">
+                    <div className="picture-container">
                     <img
-                        className="slide"
+                        src={image.src}
                         key={index}
-                        src={image.url}
                         alt={image.title}
                     ></img>
+                    </div>
+                </div> 
+                </CSSTransition>   
                 )  
             ))}
         </div>
