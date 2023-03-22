@@ -1,0 +1,123 @@
+.signup-form {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 70;
+    position: relative;
+
+    h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #EB6E44;
+        text-align: center;
+        flex-grow: 1;
+    }
+    // .btn {
+    //     border-radius: 5px;
+    //     background-color: #EB6E44;
+    //     border-color: #EB6E44;
+    //     margin: 0 auto;
+    //     margin-right: 15%;
+    //     font-weight: 800;
+    //     &:hover {
+    //     background-color: #d1613c;
+    //     border-color: #d1613c;
+    //     }
+    // }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex-grow: 1;
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+
+            input {
+                width: 65%;
+                border-radius: 5px;
+                border: none;
+                padding: 10px 15px;
+                font-size: 14px;
+                color: black;
+                background-color: antiquewhite;
+                &:focus {
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    .pass-block {
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        flex-grow: 1;
+
+        .input-field {
+            width: 48%;
+        }
+    }
+
+    .cgu-send {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            font-size: .8rem;
+            width: 60%;
+            margin-left: 10px;
+        }
+
+        input {
+            width: 20px;
+            height: 20px;
+            margin-left: 10%;
+        }
+
+        .cgu-block {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    .triangle-leftUp {
+        position: absolute;
+        top: -90%;
+        left: -30%;
+        width: 500px;
+        height: 600px;
+        background-color:  rgba(236, 103, 10, 0.5);
+        transform: rotate(60deg);
+        z-index: 52;
+        overflow: hidden;
+        box-shadow: inset 0px 0px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .triangle-rightUp {
+        position: absolute;
+        top: -36%;
+        right: -55%;
+        width: 600px;
+        height: 500px;
+        background-color:rgba(236, 103, 10, 0.5);
+        transform: rotate(58deg);
+        z-index: 52;
+        overflow: hidden;
+        box-shadow: inset 0px 0px 40px rgba(0, 0, 0, 0.1);
+    }
+
+}

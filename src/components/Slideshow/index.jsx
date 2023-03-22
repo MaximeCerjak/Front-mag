@@ -8,13 +8,11 @@ const Slideshow = () => {
 
     const slide = document.querySelector('.slide');
     const [slideHeight, setSlideHeight] = useState(0);
-    console.log(slide);
     // const [slideWidth, setSlideWidth] = useState(slide.style.width);
     const ratio = 0.75; // ratio hauteur/largeur
 
     useEffect(() => {
         const slide = document.querySelector('.slide');
-        console.log(slide);
     }, []);
 
     useEffect(() => {
