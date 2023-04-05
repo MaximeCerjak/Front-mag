@@ -27,18 +27,8 @@ $orangeMash : #EB6E44;
             width:100%;
     }
 
-    a {
-        font-weight: 500;
-        color: #000;
-        text-decoration: inherit;
-    }
-    a:hover {
-        color: $orangeMash;
-    }
-
     body {
         margin: 0;
-        // place-items: center;
         width: 100%;
         min-height: 100vh;
     }
@@ -81,7 +71,7 @@ $orangeMash : #EB6E44;
 
     header {
         position: static;
-        background-color: white;
+        background-color: rgb(29, 30, 29);
         box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
         padding: 0 1em;
         transition: position 6s;
@@ -92,6 +82,15 @@ $orangeMash : #EB6E44;
         flex-direction: row;
         align-items: center;
         max-width: 600px;
+        position: relative;
+        top: 10px;
+        right: -.5%;
+    }
+
+    .hr-pos {
+        position: relative;
+        top: -5px;
+        right: -6%;
     }
 
     .header-left {
@@ -105,7 +104,7 @@ $orangeMash : #EB6E44;
         right: 0;
         z-index: 100;
         padding-top: 20px;
-        background-color: white;
+        background-color: rgb(29, 30, 29);
     }
 
 
@@ -114,7 +113,7 @@ $orangeMash : #EB6E44;
         width: 100%;
         flex-direction: row;
         align-items: center;
-        background-color: white;
+        background-color: rgb(29, 30, 29);
         justify-content: space-between;
     }
 
@@ -124,7 +123,7 @@ $orangeMash : #EB6E44;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        background-color: white;
+        background-color: rgb(29, 30, 29);
     }
 
     .hb-display {
@@ -150,7 +149,40 @@ $orangeMash : #EB6E44;
         font-size: 1.4rem;
         font-family: 'Inter', sans-serif;
         margin: 0 1em;
+        position: relative;
+        left: 26%;
     }
+
+    nav {
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.25s;
+            font-size: 1em;
+
+            &:hover {
+                color: $orangeMash;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 50%;
+                background-color: $orangeMash;
+                transition: all 0.3s;
+                transform: translateX(-50%);
+            }
+
+            &:hover::before {
+                width: 100%;
+            }
+        }
+    }
+
 
     .search-bar {
         border-radius: 3px;
@@ -196,18 +228,41 @@ $orangeMash : #EB6E44;
         display:none;
     }
 
-    .logo-sm {
+    .logo-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        margin: 0.5em 0;
+        position: absolute;
+        top: 10px;
+        left: 20px;
+    }
+
+    .logo {
+        width: 100%;
+    }
+
+    .logo-sm-container {
+        margin: 0;
         width: 100px;
+        position: relative;
+        top: 0;
+        left: -5%;
+    }
+
+    .logo-sm {
+        width: 100%;
     }
 
     .side-menu-btn {
         background-color: $orangeMash;
         position: absolute;
-        top: 145px;
+        top: 116px;
         left:0;
         z-index:50;
         border-bottom-right-radius: 15px;
-        border-top-right-radius: 15px;
         padding: 0.5em;
         border-right: 2px solid rgb(43, 41, 41);
         border-top: 2px solid rgb(43, 41, 41);
@@ -217,11 +272,10 @@ $orangeMash : #EB6E44;
     .sidem-btn-pos {
         background-color: $orangeMash;
         position: absolute;
-        top: 45px;
+        top: 83px;
         left:0;
         z-index:100;
         border-bottom-right-radius: 15px;
-        border-top-right-radius: 15px;
         padding: 0.2em 0.5em;
         border-right: 2px solid rgb(43, 41, 41);
         border-top: 2px solid rgb(43, 41, 41);
