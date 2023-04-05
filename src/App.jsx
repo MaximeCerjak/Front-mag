@@ -4,18 +4,24 @@ import Slideshow from './components/Slideshow';
 import Intro from './components/Intro';
 import Gallery from './components/Gallery';
 import SlideNews from './components/SlideNews';
+import LoginModal from './components/Modals/Login/LoginModal';
 import SignupModal from './components/Modals/Signup/SignupModal';
 
 const App = () => {
-    const [showModal, setShowModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showSignupModal, setShowSignupModal] = useState(false);
 
     const handleShowModal = () => {
         console.log("click");
-        setShowModal(true);
+        setShowLoginModal(true);
     };
 
-    const handleCloseModal = () => {
-        setShowModal(false);
+    const handleCloseLoginModal = () => {
+        setShowLoginModal(false);
+    };
+
+    const handleCloseSignupModal = () => {
+        setShowSignupModal(false);
     };
 
     return (
@@ -25,7 +31,8 @@ const App = () => {
             <Intro/>
             <Gallery />
             <SlideNews />
-            <SignupModal showModal={showModal} onCloseModal={handleCloseModal} />
+            <LoginModal showLoginModal={showLoginModal} handleCloseLoginModal={handleCloseLoginModal} setShowSignupModal={setShowSignupModal}/>
+            <SignupModal showSignupModal={showSignupModal} onCloseModal={handleCloseSignupModal} />
         </div>
     );
 };
