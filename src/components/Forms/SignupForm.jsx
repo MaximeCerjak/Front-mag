@@ -12,7 +12,7 @@ const SignupForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await api.post('/user/signup', { email, password, name, pseudo });
+            const response = await api.post('/api/user/create', { email, password, name, pseudo });
             // Traitez la réponse de l'API (par exemple, enregistrez le token d'authentification, redirigez vers une autre page, etc.)
             console.log('Inscription réussie:', response.data);
         } catch (error) {

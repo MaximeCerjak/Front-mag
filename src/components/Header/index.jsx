@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo-white-mag.png';
 import userIo from '../../assets/users.png';
 import Menu from '../Menu/Menu'; // import du composant Menu
 
@@ -31,7 +31,9 @@ const Header = ({ onShowModal }) => {
         <header className={scroll ? "fixed" : ""}>
             <div className={scroll ? "disabled" : "header-top"}>
                 <div className="header-left">
-                    <img src={logo} className="logo" />
+                    <p className="logo-container">
+                        <img src={logo} className="logo" />
+                    </p>
                 </div>
                 <div>
                     <nav>
@@ -58,9 +60,11 @@ const Header = ({ onShowModal }) => {
                             <Menu />
                         </div>
                     </div>
-                    <img src={logo} className="logo-sm" />
+                    <p className="logo-sm-container">
+                        <img src={logo} className="logo-sm" />
+                    </p>
                     <input type="text" placeholder="Rechercher" className="search-bar" />
-                    <div className="header-right">
+                    <div className="header-right hr-pos">
                         <div>
                             <span className='orangeMashFont'>Dépôt</span><span> | </span><span className='orangeMashFont'>Se connecter</span>
                         </div>
