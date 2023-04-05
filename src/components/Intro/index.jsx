@@ -20,7 +20,7 @@ const Intro = () => {
                     </div>
                     <div className="intro-picture">
                         <video autoPlay loop={true}>
-                            <source src="./src/assets/intro_mag.mp4" type="video/mp4"/>
+                            <source src="../public/intro_mag.mp4" type="video/mp4"/>
                         </video>
                     </div>
                 </div>
