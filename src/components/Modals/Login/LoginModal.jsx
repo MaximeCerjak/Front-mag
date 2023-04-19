@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import LoginForm from '../../Forms/LoginForm';
 import './style.scss';
-import SignupModal from '../Signup/SignupModal';
 
 const LoginModal = ({ showLoginModal, handleCloseLoginModal, setShowSignupModal }) => {
     const [animOn, setAnimOn] = useState(false); // Etat de l'animation
@@ -28,7 +27,7 @@ const LoginModal = ({ showLoginModal, handleCloseLoginModal, setShowSignupModal 
                     </svg>
                 </div>
                 <div className="modal-content">
-                    <LoginForm />
+                    <LoginForm handleClose={handleClose}/>
                 </div>
                 <p>
                 Pas encore de compte ?{' '}

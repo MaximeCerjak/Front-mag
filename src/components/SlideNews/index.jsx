@@ -47,9 +47,9 @@ const SlideNews = () => {
             </div>
             <div>
                 {categories.map((category, index) => (
-                    <div key={index}>
+                    <div key={`${category}-${index}`}>
                         {category.images.map((item, index) => (
-                            <span key={index}>
+                            <span key={`${index}-img`}>
                                 <img src={item.src} alt="image" />
                             </span>
                         ))}

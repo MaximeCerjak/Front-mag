@@ -1,0 +1,34 @@
+.my-creations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 1000px;
+}
+
+.creation-item {
+    width: 150px;
+    height: 150px;
+    background-color: #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer; // Changer le curseur au survol des items
+    transition: transform 0.3s; // Ajouter une transition pour l'effet de survol
+
+    &:hover {
+      transform: scale(1.05); // Ajouter un effet de survol pour agrandir légèrement l'item
+    }
+}
+
+.show-more {
+    margin-top: 20px;
+}

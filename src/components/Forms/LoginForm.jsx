@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
-import api from '../../api/api';
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions/authActions';
 import './style.scss';
 import AnimatedBorderButton from '../Buttons/AnimatedBorderBtn';
 
-const LoginForm = () => {
+const LoginForm = ({handleClose}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        try {
-            const response = await api.post('/api/login_check', { email, password });
-            // Enregistrer le token dans le localStorage
-            localStorage.setItem('token', response.data.token);
-            // Rediriger l'utilisateur vers la page d'accueil
-            window.location.href = '/';
-        } catch (error) {
-            // Gérez les erreurs (par exemple, affichez un message d'erreur)
-            console.error('Erreur lors de la connexion:', error);
-        }
+        dispatch(login(email, password));
+        handleClose();
     };
 
     return (
