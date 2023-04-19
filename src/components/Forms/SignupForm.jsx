@@ -34,14 +34,9 @@ const SignupForm = () => {
 
         try {
             const response = await api.post('/api/user/create', { email, password, name, pseudo, typeUser });
-            // Enregistrer le token dans le localStorage
-            localStorage.setItem('token', response.data.token);
-            // Enregistrer le user dans le localStorage
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            // Rediriger l'utilisateur vers la page d'accueil
             window.location.href = '/';
+            alert('Inscription réussie')
         } catch (error) {
-            // Gérez les erreurs (par exemple, affichez un message d'erreur)
             console.error('Erreur lors de l\'inscription:', error);
         }
     };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../assets/logo-white-mag.png';
 import userIo from '../../assets/users.png';
-import Menu from '../Menu/Menu'; // import du composant Menu
+import Menu from '../Menu/Menu'; 
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
