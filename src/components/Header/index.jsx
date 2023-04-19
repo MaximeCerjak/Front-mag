@@ -2,33 +2,33 @@ import React, { useState, useEffect } from 'react';
 import logo from '../../assets/logo-white-mag.png';
 import userIo from '../../assets/users.png';
 import Menu from '../Menu/Menu'; // import du composant Menu
+import { useNavigate, Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
 
 const Header = ({ onShowModal }) => {
     const [scroll, setScroll] = useState(false);
-    const [isWiggling1, setWiggling1] = useState(false);
-    const [isWiggling2, setWiggling2] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isWiggling, setWiggling] = useState(false);
+    const navigate = useNavigate();
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setIsAuthenticated(true);
+    const dispatch = useDispatch();
+
+    const handleClick = () => {
+        if(isAuthenticated) {
+            console.log("isAuthenticated redirect to profile")
+            navigate('/profile');
+        } else {
+            setWiggling(!isWiggling);
+            onShowModal('login');
         }
-    }, []);
-
-    const handleClick1 = () => {
-        setWiggling1(!isWiggling1);
-        onShowModal('signup');
-    };
-
-    const handleClick2 = () => {
-        setWiggling2(!isWiggling2);
-        onShowModal('login');
+        
     };
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        setIsAuthenticated(false);
+        dispatch(logoutUser());
+        navigate('/');
     };
 
     useEffect(() => {
@@ -41,21 +41,25 @@ const Header = ({ onShowModal }) => {
         });
     }, []);
 
+    const showIsAuthenticated = () => {
+        console.log("isAuthenticated", isAuthenticated)
+    }
+
     return (
         <header className={scroll ? "fixed" : ""}>
             <div className={scroll ? "disabled" : "header-top"}>
                 <div className="header-left">
                     <p className="logo-container">
-                        <img src={logo} className="logo" />
+                        <img src={logo} className="logo" onClick={showIsAuthenticated}/>
                     </p>
                 </div>
                 <div>
                     <nav>
                         <ul className="flex flex-row">
-                            <li className="mr-6"><a href="#">Accueil</a></li>
-                            <li className="mr-6"><a href="#">À Propos</a></li>
-                            <li className="mr-6"><a href="#">Services</a></li>
-                            <li className="mr-6"><a href="#">Contact</a></li>
+                            <Link to="/"><li className="mr-6"><a href="#">Accueil</a></li></Link>
+                            <Link to="/about"><li className="mr-6"><a href="#">À Propos</a></li></Link>
+                            <Link to="/services"><li className="mr-6"><a href="#">Services</a></li></Link>
+                            <Link to="/contact"><li className="mr-6"><a href="#">Contact</a></li></Link>
                         </ul>
                     </nav>
                 </div>
@@ -70,12 +74,12 @@ const Header = ({ onShowModal }) => {
                                 </span>
                             </div>
                         ) : (
-                            <span className='orangeMashFont' onClick={handleClick2}>
+                            <span className='orangeMashFont' onClick={handleClick}>
                                 Se connecter
                             </span>
                         )}
                     </div>
-                    <img src={userIo} alt="Utilisateur" className={`icon  ${isWiggling1 ? 'wiggle' : ''}`} onClick={handleClick2} />
+                    <img src={userIo} alt="Utilisateur" className="icon" onClick={handleClick} />
                 </div>
             </div>
             {scroll ?
@@ -100,18 +104,17 @@ const Header = ({ onShowModal }) => {
                                     </span>
                                 </div>
                             ) : (
-                                <span className='orangeMashFont' onClick={handleClick2}>
+                                <span className='orangeMashFont' onClick={handleClick}>
                                     Se connecter
                                 </span>
                             )}
                         </div>
-                        <img src={userIo} alt="Utilisateur" className={`icon  ${isWiggling1 ? 'wiggle' : ''}`} onClick={handleClick2} />
+                        <img src={userIo} alt="Utilisateur" className="icon" onClick={handleClick} />
                     </div>
                 </div> :
                 <div className='header-bottom'>
                     <div className="side-menu-btn">
                         <div type="button">
-                            {/* Utilisation du composant Menu ici */}
                             <Menu />
                         </div>
                     </div>

@@ -8,11 +8,32 @@ const SignupForm = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [pseudo, setPseudo] = useState('');
+    const [typeUser, setTypeUser] = useState('user');
+
+    const handleTypeUser = (e) => {
+        e.preventDefault();
+        setTypeUser(e.target.value);
+
+        if (e.target.value === 'user') {
+            document.querySelector('.typeUser-btn-left').classList.add('active');
+            document.querySelector('.typeUser-btn-right').classList.remove('active');
+        } else if (e.target.value === 'creator') {
+            document.querySelector('.typeUser-btn-left').classList.remove('active');
+            document.querySelector('.typeUser-btn-right').classList.add('active');
+        }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const cgu = document.getElementById('cgu').checked;
+
+        if (!cgu) {
+            alert('Vous devez accepter les conditions générales d\'utilisation');
+            return;
+        }
+
         try {
-            const response = await api.post('/api/user/create', { email, password, name, pseudo });
+            const response = await api.post('/api/user/create', { email, password, name, pseudo, typeUser });
             // Enregistrer le token dans le localStorage
             localStorage.setItem('token', response.data.token);
             // Enregistrer le user dans le localStorage
@@ -27,6 +48,10 @@ const SignupForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className="signup-form" autoComplete="off">
+            <div className="typeUser">
+                <button type="checkbox" className="typeUser-btn typeUser-btn-left active" value="user" onClick={handleTypeUser}>Compte usager</button>
+                <button type="checkbox" className="typeUser-btn typeUser-btn-right" value="creator" onClick={handleTypeUser}>Compte créateur</button>
+            </div>
             <div className="triangle-leftUp"></div>
             <div className="triangle-rightUp"></div>
             <h2>Inscription</h2>

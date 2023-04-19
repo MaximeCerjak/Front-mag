@@ -1,0 +1,108 @@
+.comment-notification {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.resource-icon {
+    width: 48px;
+    height: 48px;
+    background-color: #cccccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+}
+
+.comment-count {
+    position: relative;
+    display: flex;
+    left: -36px;
+    top: 15px;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: #EB6E44;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+//Animation bulles notifs
+
+@keyframes square {
+    0%, 100% {
+        border-radius: 50%;
+    }
+    50% {
+        border-radius: 0;
+    }
+}
+
+@keyframes wiggle {
+    0% { transform: rotate(0deg) translateX(0); }
+    80% { transform: rotate(0deg) translateX(2px); }
+    85% { transform: rotate(7deg) translateX(-2px); }
+    95% { transform: rotate(-7deg) translateX(2px);}
+    100% { transform: rotate(0deg) translateX(-2px); }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    10% {
+        transform: translateY(0);
+    }
+    20% {
+        transform: translateY(10px);
+    }
+    30% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(6px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    60% {
+        transform: translateY(4px);
+    }
+    70% {
+        transform: translateY(0);
+    }
+    80% {
+        transform: translateY(2px);
+    }
+    90% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.square {
+    animation: square 1s;
+}
+
+.bounce {
+    animation: bounce 1.5s;
+}
+
+.wiggle {
+    animation: wiggle 2.5s;
+}
+
+
+
