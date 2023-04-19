@@ -11,11 +11,7 @@ const LoginModal = ({ showLoginModal, handleCloseLoginModal, setShowSignupModal 
     };
 
     const handleClose = () => {
-        setAnimOn(true); // Déclenche l'animation
-        setTimeout(() => {
-            handleCloseLoginModal();
-            setAnimOn(false); // Réinitialise l'état de l'animation
-        }, 800); // Appel de la fonction onClose après la fin de l'animation (2s)
+        handleCloseLoginModal();
     };
 
     return (
