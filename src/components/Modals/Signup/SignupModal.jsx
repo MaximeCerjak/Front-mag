@@ -6,11 +6,7 @@ const SignupModal = ({ showSignupModal, onCloseModal }) => {
     const [animOn, setAnimOn] = useState(false); // Etat de l'animation
 
     const handleClose = () => {
-        setAnimOn(true); // Déclenche l'animation
-        setTimeout(() => {
-            onCloseModal();
-            setAnimOn(false); // Réinitialise l'état de l'animation
-        }, 800); // Appel de la fonction onClose après la fin de l'animation (2s)
+        onCloseModal();
     };
 
     return (

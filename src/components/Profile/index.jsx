@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Header from '../Header';
 import Footer from '../Footer';
 import './style.scss';
+import { logoutUser } from '../../actions/authActions';
 
 
 import Statistics from './Statistics/Statistics';
@@ -17,6 +18,9 @@ const Profile = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [activeComponent, setActiveComponent] = useState('myProfile');
     const [mainComponent, setMainComponent] = useState(<MyProfile />);
+
+    const navigate = useNavigate();
+
     const roles = useSelector((state) => state.auth.roles);
     const isCreator = useState(false);
     const identifier = useSelector((state) => state.auth.id);
@@ -43,9 +47,14 @@ const Profile = () => {
     };
 
     const handleLogout = () => {
-        dispatch(logout());
-        window.location.href('/');
+        dispatch(logoutUser());
     };
+
+    useEffect(() => {
+        if(!isAuthenticated) {
+            navigate('/');
+        }
+    }, [isAuthenticated]);
 
     useEffect(() => {
         setMainComponent(renderActiveComponent());
