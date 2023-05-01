@@ -40,7 +40,7 @@ export const logoutUser = () => async (dispatch) => {
 
 export const fetchUserProfile = (token) => async (dispatch) => {
     try {
-        const response = await api.get('/api/user/role', {
+        const response = await api.get('/api/user/me', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

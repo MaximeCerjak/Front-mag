@@ -16,4 +16,4 @@ const loginUser = async (email, password) => {
     }
 };
 
-export default { loginUser };
+export default { loginUser, instance };

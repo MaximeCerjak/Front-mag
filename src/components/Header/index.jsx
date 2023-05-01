@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../assets/logo-white-mag.png';
 import userIo from '../../assets/users.png';
-import Menu from '../Menu/Menu'; 
 import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import { useLocation } from 'react-router-dom';
+import './Header.scss';
 
 const Header = ({ onShowModal }) => {
     const [scroll, setScroll] = useState(false);
     const [isWiggling, setWiggling] = useState(false);
     const navigate = useNavigate();
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const location = useLocation();
+
 
     const dispatch = useDispatch();
 
@@ -26,12 +30,30 @@ const Header = ({ onShowModal }) => {
         
     };
 
+    const handleProfileIconClick = () => {
+        if (isAuthenticated) {
+            setShowDropdown(!showDropdown);
+        } else {
+            handleClick();
+        }
+    };
+
     const handleLogout = () => {
         dispatch(logoutUser());
         navigate('/');
     };
 
+    const navigateTo = (path) => {
+        navigate(path);
+        setShowDropdown(false);
+    };
+
     useEffect(() => {
+
+        if(location.pathname === '/profile') {
+            return;
+        }
+        
         window.addEventListener('scroll', () => {
             if (window.scrollY > 200) {
                 setScroll(true);
@@ -65,45 +87,35 @@ const Header = ({ onShowModal }) => {
                 </div>
                 <div className="header-right">
                     <div>
-                        {isAuthenticated ? (
-                            <div>
-                                <span className='orangeMashFont'>Dépôt</span>
-                                <span style={{color:"white"}}> | </span>
-                                <span className='orangeMashFont' onClick={handleLogout}>
-                                    Déconnexion
-                                </span>
-                            </div>
-                        ) : (
+                        {isAuthenticated ? null : (
                             <span className='orangeMashFont' onClick={handleClick}>
                                 Se connecter
                             </span>
                         )}
                     </div>
-                    <img src={userIo} alt="Utilisateur" className="icon" onClick={handleClick} />
+                    <img src={userIo} alt="Utilisateur" className="icon" onClick={handleProfileIconClick} />
+                    {isAuthenticated && showDropdown && (
+                        <div className="dropdown-menu">
+                            <ul>
+                                <li onClick={() => navigateTo('/profile')}>Mon profil</li>
+                                {/* Vous pouvez ajouter une condition pour vérifier si l'utilisateur est un créateur */}
+                                <li onClick={() => navigateTo('/depots')}>Mes dépôts</li>
+                                <li onClick={() => navigateTo('/ressources')}>Mes ressources</li>
+                                <li onClick={handleLogout}>Déconnexion</li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </div>
             {scroll ?
                 <div className='hb-display pb-1'>
-                    <div className="sidem-btn-pos">
-                        <div type="button">
-                            <Menu />
-                        </div>
-                    </div>
                     <p className="logo-sm-container">
                         <img src={logo} className="logo-sm" />
                     </p>
                     <input type="text" placeholder="Rechercher" className="search-bar" />
                     <div className="header-right hr-pos">
                         <div>
-                            {isAuthenticated ? (
-                                <div>
-                                    <span className='orangeMashFont'>Dépôt</span>
-                                    <span>|</span>
-                                    <span className='orangeMashFont' onClick={handleLogout}>
-                                        Déconnexion
-                                    </span>
-                                </div>
-                            ) : (
+                            {isAuthenticated ? null : (
                                 <span className='orangeMashFont' onClick={handleClick}>
                                     Se connecter
                                 </span>
@@ -113,11 +125,6 @@ const Header = ({ onShowModal }) => {
                     </div>
                 </div> :
                 <div className='header-bottom'>
-                    <div className="side-menu-btn">
-                        <div type="button">
-                            <Menu />
-                        </div>
-                    </div>
                     <input type="text" placeholder="Rechercher" className="search-bar" />
                 </div>
             }

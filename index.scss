@@ -2,12 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Fredoka';
+    src: url('./src/fonts/static/Fredoka-Bold.ttf') format('truetype'),
+        url('./src/fonts/static/Fredoka-Medium.ttf') format('truetype'),
+        url('./src/fonts/static/Fredoka-Regular.ttf') format('truetype'),
+        url('./src/fonts/static/Fredoka-SemiBold.ttf') format('truetype'),
+        url('./src/fonts/static/Fredoka-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 $orangeMash : #EB6E44;
 
 
 :root {
         margin: 0;
-        font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+        padding: 0;
+        font-family: Fredoka, sans-serif;
         line-height: 1.5;
         font-weight: 400;
 
@@ -29,6 +42,7 @@ $orangeMash : #EB6E44;
 
     body {
         margin: 0;
+        padding: 0;
         width: 100%;
         min-height: 100vh;
     }
@@ -172,8 +186,8 @@ $orangeMash : #EB6E44;
         border: 1px solid rgb(160, 157, 157);
         padding: 0.2em 1.2em;
         font-size: 1em;
-        font-weight: 600;
-        font-family: inherit;
+        font-weight: 400;
+        font-family: 'Inter', sans-serif;
         background-color: #4e4b4b;
         cursor: pointer;
         transition: border-color 0.25s;
@@ -242,7 +256,7 @@ $orangeMash : #EB6E44;
     .side-menu-btn {
         background-color: $orangeMash;
         position: absolute;
-        top: 110px;
+        top: 105px;
         left:0;
         z-index:50;
         border-bottom-right-radius: 15px;
@@ -410,6 +424,10 @@ $orangeMash : #EB6E44;
     position: relative;
     background-color: #ffffff;
     padding-bottom: 1em;
+    margin-top: 280px;
+    width: 70%;
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
 }
 
 .intro-title {
