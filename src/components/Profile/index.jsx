@@ -13,6 +13,8 @@ import MyProfile from './MyProfile/MyProfile';
 import MyCreations from './MyCreations/MyCreations';
 import MyFavorites from './MyFavorites/MyFavorites';
 import MyDownloads from './MyDownloads/MyDownloads';
+import ResourceDeposit from './ResourceDeposit/ResourceDeposit';
+import EditArticle from './EditArticle';
 
 const Profile = () => {
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -71,11 +73,15 @@ const Profile = () => {
             case 'myProfile':
                 return <MyProfile />;
             case 'myCreations':
-                return <MyCreations />;
+                return <MyCreations handleSetActiveComponent={handleSetActiveComponent}/>;
             case 'myFavorites':
                 return <MyFavorites />;
             case 'myDownloads':
                 return <MyDownloads />;
+            case 'resourceDeposit':
+                return <ResourceDeposit />;
+            case 'editArticle':
+                return <EditArticle />;
             default:
                 return <MyProfile />;
         }
@@ -98,7 +104,17 @@ const Profile = () => {
                             )}
                             {roles.includes('ROLE_CREATOR') && (
                                 <li>
+                                    <Link to='#' onClick={() => handleSetActiveComponent('resourceDeposit')} className="resourceDeposit">Dépôt</Link>
+                                </li>
+                            )}
+                            {roles.includes('ROLE_CREATOR') && (
+                                <li>
                                     <Link to='#' onClick={() => handleSetActiveComponent('statistics')} className="statistics">Statistiques</Link>
+                                </li>
+                            )}
+                            {roles.includes('ROLE_CREATOR') && (
+                                <li>
+                                    <Link to='#' onClick={() => handleSetActiveComponent('editArticle')} className="editArticle">Créer un article</Link>
                                 </li>
                             )}
                             <li>

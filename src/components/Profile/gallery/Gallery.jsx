@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Gallery.scss';
 
-const Gallery = ({ title, items, depot }) => {
+const Gallery = ({ title, items, depot, handleSetActiveComponent }) => {
     const [plainItems, setPlainItems] = useState(false);
     const [displayedItems, setDisplayedItems] = useState([]);
 
@@ -19,8 +19,23 @@ const Gallery = ({ title, items, depot }) => {
         }
     };
 
-    const goToUploadForm = (title) => {
-        console.log(title);
+    const goToUploadForm = () => {
+        handleSetActiveComponent('resourceDeposit');
+    };
+
+    const isUrl = (str) => {
+        const regex = new RegExp(
+            '^(https?:\\/\\/)?' + // protocole
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // nom de domaine
+            '((\\d{1,3}\\.){3}\\d{1,3}))' + // OU une adresse IP
+            '(\\:\\d+)?' + // port optionnel
+            '(\\/[-a-z\\d%_.~+]*)*' + // partie chemin
+            '(\\?[;&a-z\\d%_.~+=-]*)?' + // chaîne de requête optionnelle
+            '(\\#[-a-z\\d_]*)?$',
+            'i'
+        );
+    
+        return !!regex.test(str);
     };
 
     return (
@@ -33,8 +48,8 @@ const Gallery = ({ title, items, depot }) => {
             </div>
             <div className="gallery">
                 {displayedItems.map((item, index) => (
-                    <div key={index} className="gallery-item">
-                        {item}
+                    <div key={index} className="gallery-item" style={{ "--background-image" : `url(${item})`}}>
+                        {isUrl(item) ? null : <p>{item}</p> }                
                     </div>
                 ))}
             </div>

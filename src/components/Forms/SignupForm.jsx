@@ -6,6 +6,7 @@ import AnimatedBorderButton from '../Buttons/AnimatedBorderBtn';
 const SignupForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [verifiedPass, setVerifiedPass] = useState('');
     const [name, setName] = useState('');
     const [pseudo, setPseudo] = useState('');
     const [typeUser, setTypeUser] = useState('user');
@@ -29,6 +30,11 @@ const SignupForm = () => {
 
         if (!cgu) {
             alert('Vous devez accepter les conditions générales d\'utilisation');
+            return;
+        }
+
+        if (password !== verifiedPass) {
+            alert('Les mots de passe ne correspondent pas');
             return;
         }
 
@@ -91,8 +97,8 @@ const SignupForm = () => {
                     <input
                         type="password"
                         id="password-confirm"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={verifiedPass}
+                        onChange={(e) => setVerifiedPass(e.target.value)}
                         placeholder=""
                         autoComplete="off"
                     />
