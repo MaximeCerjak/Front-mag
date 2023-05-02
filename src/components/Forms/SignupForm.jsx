@@ -3,13 +3,17 @@ import api from '../../api/api';
 import './style.scss';
 import AnimatedBorderButton from '../Buttons/AnimatedBorderBtn';
 
-const SignupForm = () => {
+const SignupForm = ({closeModal}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [verifiedPass, setVerifiedPass] = useState('');
     const [name, setName] = useState('');
     const [pseudo, setPseudo] = useState('');
     const [typeUser, setTypeUser] = useState('user');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [notSimilarError, setNotSimilarError] = useState('');
+    const [emailError, setEmailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
 
     const handleTypeUser = (e) => {
         e.preventDefault();
@@ -24,6 +28,24 @@ const SignupForm = () => {
         }
     };
 
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+        setEmailError(false);
+        setErrorMessage('');
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        setPasswordError(false);
+        setNotSimilarError('');
+    };
+
+    const handleVerifiedPasswordChange = (e) => {
+        setVerifiedPass(e.target.value);
+        setPasswordError(false);
+        setNotSimilarError('');
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         const cgu = document.getElementById('cgu').checked;
@@ -34,16 +56,26 @@ const SignupForm = () => {
         }
 
         if (password !== verifiedPass) {
-            alert('Les mots de passe ne correspondent pas');
+            setPasswordError(true);
+            setNotSimilarError('Les mots de passe ne sont pas identiques');
+            return;
+        } else if (password.length < 8) {
+            setPasswordError(true);
+            setNotSimilarError('Le mot de passe doit contenir au moins 8 caractères');
             return;
         }
 
         try {
             const response = await api.post('/api/user/create', { email, password, name, pseudo, typeUser });
-            window.location.href = '/';
+            closeModal();
             alert('Inscription réussie')
         } catch (error) {
-            console.error('Erreur lors de l\'inscription:', error);
+            if (error.response && error.response.status === 500 && error.response.data && error.response.data.detail.includes("Integrity constraint violation: 1062 Duplicate entry")) {
+                setEmailError(true);
+                setErrorMessage("L'adresse e-mail est déjà utilisée. Veuillez en choisir une autre.");
+            } else {
+                setErrorMessage("Une erreur s'est produite lors de l'inscription. Veuillez réessayer.");
+            }
         }
     };
 
@@ -68,39 +100,43 @@ const SignupForm = () => {
                         autoComplete='off'
                     />
                 </div>
-                <div className="input-field">
+                <div className={`input-field ${emailError ? 'error' : ''}`}>
                     <label htmlFor="email">Email</label>
                     <input
                         type="email"
                         id="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         placeholder=""
                         autoComplete='off'
                     />
+                    {errorMessage && <div className="error-message">{errorMessage}</div>}
                 </div>
             </div>
             <div className="form-group pass-block">
-                <div className="input-field pass-enter">
+                <div className={`input-field pass-enter ${passwordError ? 'error' : ''}`}>
                     <label htmlFor="password">Mot de passe</label>
                     <input
                         type="password"
                         id="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange}
                         placeholder=""
                         autoComplete='off'
+                        style={passwordError ? { borderColor: 'red' } : {}}
                     />
+                    {notSimilarError && <div className="error-message">{notSimilarError}</div>}
                 </div>
-                <div className="input-field pass-confirm">
+                <div className={`input-field pass-confirm ${passwordError ? 'error' : ''}`}>
                     <label htmlFor="password-confirm">Confirmer le mot de passe</label>
                     <input
                         type="password"
                         id="password-confirm"
                         value={verifiedPass}
-                        onChange={(e) => setVerifiedPass(e.target.value)}
+                        onChange={handleVerifiedPasswordChange}
                         placeholder=""
                         autoComplete="off"
+                        style={passwordError ? { borderColor: 'red' } : {}}
                     />
                 </div>
             </div>

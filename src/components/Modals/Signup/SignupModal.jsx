@@ -18,7 +18,7 @@ const SignupModal = ({ showSignupModal, onCloseModal }) => {
                     </svg>
                 </div>
                 <div className="modal-content">
-                    <SignupForm />
+                    <SignupForm closeModal={handleClose}/>
                 </div>
             </div>
         </div>

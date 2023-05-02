@@ -176,3 +176,13 @@
     width: 70%;
     margin: 0 auto;
 }
+
+.error-message {
+    color: rgba(214, 22, 22, 0.808);
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.input-field.error input {
+    border: 1px solid rgba(223, 15, 15, 0.89) !important;
+}
