@@ -50,7 +50,7 @@ const MyCreations = ({handleSetActiveComponent}) => {
     const itemsPicture = [];
 
     for (let i = 0; i < pictures.length; i++) {
-        itemsPicture[i] = `http://127.0.0.1:8000${pictures[i].pic_url}`; 
+        itemsPicture[i] = `https://mash-api.herokuapp.com${pictures[i].pic_url}`; 
     }
 
     console.log(itemsPicture);
