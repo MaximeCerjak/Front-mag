@@ -14,12 +14,24 @@ const ResourceForm = () => {
     const [acceptTerms, setAcceptTerms] = useState(false);
     const [allowSharing, setAllowSharing] = useState(false);
     const [file, setFile] = useState(null);
+    const [fileSizeErro, setFileSizeError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const maxFileSize = 5 * 1024 * 1024;
 
     const accessToken = localStorage.getItem('token');
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+        const selectedFile = e.target.files[0]
+        if( selectedFile && selectedFile.size > maxFileSize ){
+            setFileSizeError(true);
+            setErrorMessage("L'image sélectionnée dépasse la limite autorisé de 5mo");
+        } else {
+            setFile(e.target.files[0]);
+            setFileSizeError(false);
+            setErrorMessage("");
+        }  
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,6 +83,7 @@ const ResourceForm = () => {
                 </select>
                 <label htmlFor="file">Fichier :</label>
                 <input type="file" id="file" name="file" onChange={handleFileChange} />
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <label>Titre:</label>
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
                 <label>Tags:</label>
